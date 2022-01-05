@@ -61,7 +61,7 @@ public class UsersActivity extends BaseActivity implements UserListener {
                             user.token= queryDocumentSnapshot.getString(Constants.KEY_FCM_TOKEN);
                             user.interest = queryDocumentSnapshot.getString(Constants.INTERESTS);
                             user.id= queryDocumentSnapshot.getId();
-                            if (currentUserId == queryDocumentSnapshot.getString(Constants.INTERESTS)) {
+                            if (currentUserInterest.equals(queryDocumentSnapshot.getString(Constants.INTERESTS))) {
                                 users.add(user);
                             }
                         }
