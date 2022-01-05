@@ -13,4 +13,17 @@
     <string name="select_user">Select User</string>
     <string name="type_a_message">Type a message</string>
     <string name="online">Online</string>
+
+    <string-array name="interests">
+        <item>Programming</item>
+        <item>Reading</item>
+        <item>Writing</item>
+        <item>Designing</item>
+        <item>Photography</item>
+        <item>Sketching</item>
+        <item>Painting</item>
+        <item>Gaming</item>
+        <item>Singing</item>
+        <item>Dancing</item>
+    </string-array>
 </resources>

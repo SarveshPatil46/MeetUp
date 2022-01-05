@@ -47,6 +47,7 @@ public class UsersActivity extends BaseActivity implements UserListener {
                 .addOnCompleteListener(task -> {
                     loading(false);
                     String currentUserId = preferenceManager.getString(Constants.KEY_USER_ID);
+                    String currentUserInterest = preferenceManager.getString(Constants.INTERESTS);
                     if (task.isSuccessful() && task.getResult() != null) {
                         List<User> users = new ArrayList<>();
                         for (QueryDocumentSnapshot queryDocumentSnapshot: task.getResult()){
@@ -58,8 +59,11 @@ public class UsersActivity extends BaseActivity implements UserListener {
                             user.email= queryDocumentSnapshot.getString(Constants.KEY_EMAIL);
                             user.image= queryDocumentSnapshot.getString(Constants.KEY_IMAGE);
                             user.token= queryDocumentSnapshot.getString(Constants.KEY_FCM_TOKEN);
+                            user.interest = queryDocumentSnapshot.getString(Constants.INTERESTS);
                             user.id= queryDocumentSnapshot.getId();
-                            users.add(user);
+                            if (currentUserId == queryDocumentSnapshot.getString(Constants.INTERESTS)) {
+                                users.add(user);
+                            }
                         }
                         if (users.size() >0) {
                             UsersAdapter usersAdapter = new UsersAdapter(users,this);
