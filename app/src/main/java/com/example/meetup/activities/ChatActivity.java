@@ -114,7 +114,7 @@ public class ChatActivity extends BaseActivity {
                 body.put(Constants.REMOTE_MSG_DATA,data);
                 body.put(Constants.REMOTE_MSG_REGISTRATION_IDS,tokens);
 
-                sendNotification(body.toString());
+//                sendNotification(body.toString());
             } catch (Exception exception) {
                 showToast(exception.getMessage());
             }
@@ -126,39 +126,39 @@ public class ChatActivity extends BaseActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    private void sendNotification(String messageBody) {
-        ApiClient.getClient().create(ApiService.class).sendMessage(
-                Constants.getRemoteMsgHeaders(),
-                messageBody
-        ).enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                if(response.isSuccessful()) {
-                    try {
-                        if(response.body() != null) {
-                            JSONObject responseJson = new JSONObject(response.body());
-                            JSONArray results = responseJson.getJSONArray("results");
-                            if(responseJson.getInt("failure")==1){
-                                JSONObject error = (JSONObject) results.get(0);
-                                showToast(error.getString("error"));
-                                return;
-                            }
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-//                    showToast("Notification sent successfully");
-                } else {
-                    showToast("Error " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                showToast(t.getMessage());
-            }
-        });
-    }
+//    private void sendNotification(String messageBody) {
+//        ApiClient.getClient().create(ApiService.class).sendMessage(
+//                Constants.getRemoteMsgHeaders(),
+//                messageBody
+//        ).enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+//                if(response.isSuccessful()) {
+//                    try {
+//                        if(response.body() != null) {
+//                            JSONObject responseJson = new JSONObject(response.body());
+//                            JSONArray results = responseJson.getJSONArray("results");
+//                            if(responseJson.getInt("failure")==1){
+//                                JSONObject error = (JSONObject) results.get(0);
+//                                showToast(error.getString("error"));
+//                                return;
+//                            }
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+////                    showToast("Notification sent successfully");
+//                } else {
+//                    showToast("Error " + response.code());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+//                showToast(t.getMessage());
+//            }
+//        });
+//    }
 
     private void listenAvailabilityOfReceiver() {
         database.collection(Constants.KEY_COLLECTION_USERS).document(
